@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { User, Post } = require("../models");
+const { User, Recipe } = require("../models");
 
 // GET /
 router.get("/", async (req, res) => {
-  // get all posts and display them on the homepage
+  // get all recipes and display them on the homepage
   try {
-    const postData = await Post.findAll({
-      attributes: ["id", "title", "contents", "user_id", "created_at"],
+    const recipes = await Recipe.findAll({
+      // attributes: ["id", "title", "contents", "user_id", "created_at"],
       include: [
         {
           model: User,
@@ -15,10 +15,12 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const formattedRecipes = recipes.map((recipe) =>
+      recipe.get({ plain: true })
+    );
 
     res.render("home", {
-      posts,
+      recipes: formattedRecipes,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -26,12 +28,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET /post/:id
-router.get("/post/:id", async (req, res) => {
-  // get a single post and display it on the post page
+// GET /recipe/:id
+router.get("/recipe/:id", async (req, res) => {
+  // get a single recipe and display it on the recipe page
   try {
-    const postData = await Post.findByPk(req.params.id, {
-      attributes: ["id", "title", "contents", "user_id", "created_at"],
+    const recipe = await Recipe.findByPk(req.params.id, {
+      // attributes: ["id", "title", "contents", "user_id", "created_at"],
       include: [
         {
           model: User,
@@ -40,15 +42,15 @@ router.get("/post/:id", async (req, res) => {
       ],
     });
 
-    if (!postData) {
-      res.status(404).json({ message: "No post found with this id!" });
+    if (!recipe) {
+      res.status(404).json({ message: "No recipe found with this id!" });
       return;
     }
 
-    const post = postData.get({ plain: true });
+    const formattedRecipe = recipe.get({ plain: true });
 
-    res.render("post", {
-      post,
+    res.render("recipe", {
+      recipe: formattedRecipe,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {

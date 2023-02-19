@@ -1,6 +1,6 @@
 //These are all the view routes for your application
 const router = require("express").Router();
-const { Post, User } = require("../models");
+const { Recipe, User } = require("../models");
 
 // GET /dashboard
 router.get("/", async (req, res) => {
@@ -10,12 +10,12 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    // get all posts for logged in user
-    const postData = await Post.findAll({
+    // get all recipes for logged in user
+    const recipes = await Recipe.findAll({
       where: {
         user_id: req.session.user_id,
       },
-      attributes: ["id", "title", "contents", "user_id", "created_at"],
+      // attributes: ["id", "title", "contents", "user_id", "created_at"],
       include: [
         {
           model: User,
@@ -25,11 +25,11 @@ router.get("/", async (req, res) => {
     });
 
     // serialize data so the template can read it
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const formattedRecipes = recipes.map((recipe) =>
+      recipe.get({ plain: true })
+    );
 
-    console.log({ totalPosts: postData.length });
-
-    res.render("dashboard", { posts, loggedIn: true });
+    res.render("dashboard", { recipes: formattedRecipes, loggedIn: true });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -37,8 +37,14 @@ router.get("/", async (req, res) => {
 
 // GET /dashboard/new
 router.get("/new", (req, res) => {
-  res.render("add-post", {
+  const difficulties = [
+    { value: "Easy", text: "Easy" },
+    { value: "Medium", text: "Medium" },
+    { value: "Hard", text: "Hard" },
+  ];
+  res.render("add-recipe", {
     loggedIn: true,
+    difficulties,
   });
 });
 

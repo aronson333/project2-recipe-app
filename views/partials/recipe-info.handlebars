@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <div>
+      <a href="/recipe/{{id}}">
+        <h3>{{title}}</h3>
+      </a>
+    </div>
+    <div>
+      <p id="comment-subtitle">
+        Created by <b>{{user.username}} </b> on <b>{{createdAt}}</b>
+      </p>
+    </div>
+  </div>
+  <div>
+    <p><strong>Difficulty:</strong> {{difficulty}}</p>
+  </div>
+
+  <div>
+    <p><strong>Ingredients:</strong> {{ingredients}}</p>
+  </div>
+  <div>
+    <p>{{instructions}}</p>
+  </div>
+
+  <button onclick="deleteRecipeHandler({{id}})" id="delete-recipe-button">Delete Recipe</button>
+</div>
+
+<script src="/js/delete-recipe.js"></script>

@@ -1,17 +1,15 @@
-<section class="new-post-section">
-  <a href="/dashboard/new">+ Create new post</button>
+<section class="new-recipe-section">
+  <a href="/dashboard/new">+ Create new recipe</button>
 </section>
 
 
-{{#if posts.length}}
+{{#if recipes.length}}
 <section>
   <h2>Dashboard</h2>
-  <ul class="post-list">
-    {{#each posts as |post|}}
-    <li>
-      {{> post-info post}}
-    </li>
-    {{/each}}
-  </ul>
+  {{#each recipes as |recipe|}}
+  <article>
+    {{> recipe-info recipe}}
+  </article>
+  {{/each}}
 </section>
 {{/if}}

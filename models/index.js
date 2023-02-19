@@ -1,16 +1,16 @@
 const User = require("./User");
-const Post = require("./Post");
+const Recipe = require("./Recipe");
 
 // import models
-User.hasMany(Post, {
+User.hasMany(Recipe, {
   foreignKey: "user_id",
 });
 
-Post.belongsTo(User, {
+Recipe.belongsTo(User, {
   foreignKey: "user_id",
 });
 
 module.exports = {
   User,
-  Post,
+  Recipe,
 };

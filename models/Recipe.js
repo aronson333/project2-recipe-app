@@ -3,11 +3,11 @@ const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
 const sequelize = require("../config/connection");
 
-// Initialize Post model (table) by extending off Sequelize's Model class
-class Post extends Model {}
+// Initialize Recipe model (table) by extending off Sequelize's Model class
+class Recipe extends Model {}
 
-// set up fields and rules for Post model
-Post.init(
+// set up fields and rules for Recipe model
+Recipe.init(
   {
     // define columns
     id: {
@@ -20,7 +20,15 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contents: {
+    ingredients: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    difficulty: {
+      type: DataTypes.ENUM("Easy", "Medium", "Hard"),
+      allowNull: false,
+    },
+    instructions: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -33,8 +41,8 @@ Post.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "post",
+    modelName: "recipe",
   }
 );
 
-module.exports = Post;
+module.exports = Recipe;

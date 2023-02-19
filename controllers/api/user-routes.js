@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require("../../models");
+const { User, Recipe, Comment } = require("../../models");
 
 // The `/api/users` endpoint
 
@@ -10,12 +10,8 @@ router.get("/", async (req, res) => {
       attributes: { exclude: ["password"] },
       include: [
         {
-          model: Post,
-          attributes: ["id", "title", "contents"],
-        },
-        {
-          model: Comment,
-          attributes: ["id", "contents"],
+          model: Recipe,
+          attributes: ["id", "title"],
         },
       ],
     });
@@ -25,13 +21,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-// find a single user by its `id` and populate its associated posts
+// find a single user by its `id` and populate its associated recipes
 router.get("/:id", async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
       include: [
         {
-          model: Post,
+          model: Recipe,
           attributes: ["id", "title", "contents", "created_at"],
         },
         {

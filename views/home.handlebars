@@ -1,9 +1,8 @@
-<h1>The Tech Blog</h1>
+<h1>Recipes</h1>
 
-<ul>
-  {{#each posts as |post|}}
-  <li>
-    {{> post-info post }}
-  </li>
-  {{/each}}
-</ul>
+
+{{#each recipes as |recipe|}}
+<article>
+  {{> recipe-info recipe }}
+</article>
+{{/each}}
