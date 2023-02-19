@@ -4,25 +4,27 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Blog</title>
+  <title>Recipes</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+
 </head>
 
 <body>
   <header>
-    <a href="/">Home</a>
 
     <nav>
-      {{#if loggedIn}}
-      <a href="/dashboard">Dashboard</a>
-      <button id="logout">Logout</button>
-      {{else}}
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
-      {{/if}}
+      <div>
+        <a href="/">Home</a>
+        {{#if loggedIn}}
+        <a href="/dashboard">Dashboard</a>
+        <button id="logout">Logout</button>
+        {{else}}
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+        {{/if}}
+      </div>
     </nav>
   </header>
   <main class="container">
