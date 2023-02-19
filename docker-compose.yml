@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mysql
+    container_name: project2
+    restart: always
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_PASSWORD=$DB_PASSWORD
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/:/docker-entrypoint-initdb.d/

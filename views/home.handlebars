@@ -1,0 +1,9 @@
+<h1>The Tech Blog</h1>
+
+<ul>
+  {{#each posts as |post|}}
+  <li>
+    {{> post-info post }}
+  </li>
+  {{/each}}
+</ul>

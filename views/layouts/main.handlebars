@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Blog</title>
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+    <a href="/">Home</a>
+
+    <nav>
+      {{#if loggedIn}}
+      <a href="/dashboard">Dashboard</a>
+      <button id="logout">Logout</button>
+      {{else}}
+      <a href="/login">Login</a>
+      <a href="/signup">Sign Up</a>
+      {{/if}}
+    </nav>
+  </header>
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>
